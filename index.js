@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer")
+const {menuPrompt,addDepartmentPrompt, addRolePrompt} = require("./prompts")
 
 const db = mysql.createConnection(
     {
@@ -11,29 +12,52 @@ const db = mysql.createConnection(
     console.log("connected to the employee db")
 );
 
-function init(){
-    inquirer.prompt([{
-        type:"list",
-        name:"choices",
-        message:"What do you like to do?",
-        choices: [ 
-            {name:"View All Departments", value: "ALL_DEPARTMENTS"},
-            {name:"View All Roles", value: "ALL_ROLES"},
-            {name:"View All Employees", value: "ALL_EMPLOYEES"},
-            {name:"Add a Department", value: "ADD_DEPARTMENT"},
-            {name:"Add a Role", value: "ADD_ROLE"},
-            {name:"Add an Employee", value: "ADD_EMPLOYEE"},
-            {name:"Update an Employee Role", value: "UDPATE_EMPLOYEE"},            
-        ]
-    }])
-    .then((response) => {
-        db.query
+const viewAllDepartments = async () => {
+    const [departmentRows,_] = await db.promise().query("SELECT * FROM department")
+    console.log(departmentRows)
+    mainMenu()
+}
+
+const viewAllRoles= async () => {
+    const [roleRows,_] = await db.promise().query("SELECT * FROM role")
+    console.log(roleRows)
+    mainMenu()
+}
+
+const addToDepartments = async () => {
+    try {
+        const {department_name} = await inquirer.prompt(addDepartmentPrompt)
+        console.log("got my prompt")
+        await db.promise().query(`INSERT INTO department (name) VALUES ("${department_name}")`)
+        console.log("Inserted my new department")
+        viewAllDepartments()   
+    } catch (error) {
+        console.log(error)
     }
-    )
-    .catch((error) => {
-        console.error(error);
-        console.log("\nOops! Something went wrong.")
-    })
+}
+//need to format each object with a name and value key
+
+const addToRoles = async() => {
+    try {
+        const {role_name} = await inquirer.prompt(addRolePrompt())
+        console.log("got my prompt")
+        await db.promise().query(`INSERT INTO role (tile) VALUES ("${role_title}")`)
+        console.log("Inserted my new role")
+        viewAllRoles()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const mainMenu = async () =>{
+    try {
+        inquirer.prompt(menuPrompt)
+    } catch (error) {
+        console.log(error)
+    }
 };
 
-init()
+// mainMenu()
+
+
+addToRoles()
