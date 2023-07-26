@@ -31,6 +31,37 @@ const addRolePrompt = (departmentChoices) => [{
     message:"Which department will this role belong to?",
     choices: departmentChoices
 },
+{
+    type:"input",
+    name: "role_salary",
+    message:"What's the salary for this role?"
+},
 ]
 
-module.exports = {menuPrompt,addDepartmentPrompt, addRolePrompt}
+const addEmployeePrompt = (roleChoice, employeeManager) => [
+    {
+        type: "input",
+        name: "employee_firstName",
+        message: "What is the employee's first name?"
+    },
+    {
+        type:"input",
+        name:"employee_lastName",
+        message: "What is the employee's last name?"
+    },
+    {
+        type: "list",
+        name: "employee_role",
+        message: "What is the employee's role?",
+        choices: roleChoices
+    },
+    {
+        type: "list",
+        name: "employee_Manager",
+        message: "Who is the employee's manager?",
+        choices: employeeManager
+    }
+
+]
+
+module.exports = {menuPrompt,addDepartmentPrompt, addRolePrompt, addEmployeePrompt}

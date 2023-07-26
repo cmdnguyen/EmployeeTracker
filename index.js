@@ -1,6 +1,6 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer")
-const {menuPrompt,addDepartmentPrompt, addRolePrompt} = require("./prompts")
+const {menuPrompt,addDepartmentPrompt, addRolePrompt, addEmployeePrompt} = require("./prompts")
 
 const db = mysql.createConnection(
     {
@@ -51,7 +51,8 @@ const addToRoles = async() => {
 
 const mainMenu = async () =>{
     try {
-        inquirer.prompt(menuPrompt)
+        const menuAnswer = await inquirer.prompt(menuPrompt)
+        await menuAnswer
     } catch (error) {
         console.log(error)
     }
@@ -60,4 +61,4 @@ const mainMenu = async () =>{
 // mainMenu()
 
 
-addToRoles()
+viewAllDepartments()
