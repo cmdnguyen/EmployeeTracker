@@ -1,19 +1,10 @@
-const mysql = require("mysql2");
 const inquirer = require("inquirer")
 const {menuPrompt,addDepartmentPrompt, addRolePrompt, addEmployeePrompt} = require("./prompts")
+const db = require("./dbConnection")
 
-const db = mysql.createConnection(
-    {
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "employee_db",
-    },
-    console.log("connected to the employee db")
-);
 
 const viewAllDepartments = async () => {
-    const [departmentRows,_] = await db.promise().query("SELECT * FROM department")
+    const [departmentRows,_] = await db.promise().query(`SELECT * FROM department`)
     console.log(departmentRows)
     mainMenu()
 }
@@ -24,12 +15,18 @@ const viewAllRoles= async () => {
     mainMenu()
 }
 
+const viewAllEmployees= async () => {
+    const [employeeRows,_] = await db.promise().query("SELECT * FROM employee")
+    console.log(employeeRows)
+    mainMenu()
+}
+
 const addToDepartments = async () => {
     try {
         const {department_name} = await inquirer.prompt(addDepartmentPrompt)
         console.log("got my prompt")
         await db.promise().query(`INSERT INTO department (name) VALUES ("${department_name}")`)
-        console.log("Inserted my new department")
+        console.log(`added ${department_name} to database`)
         viewAllDepartments()   
     } catch (error) {
         console.log(error)
@@ -39,10 +36,20 @@ const addToDepartments = async () => {
 
 const addToRoles = async() => {
     try {
-        const {role_name} = await inquirer.prompt(addRolePrompt())
-        console.log("got my prompt")
-        await db.promise().query(`INSERT INTO role (tile) VALUES ("${role_title}")`)
-        console.log("Inserted my new role")
+        const {role_title, role_department, role_salary} = await inquirer.prompt(addRolePrompt())
+        await db.promise().query(`INSERT INTO role (title, salary) VALUES ("${role_title}","${role_salary}");`)
+        console.log(`Inserted ${role_title} in the ${role_department} department with the salary of ${role_salary} into database`)
+        viewAllRoles()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const addEmployee = async() => {
+    try {
+        const {employee_firstName, employee_lastName, employee_role, employee_manager} = await inquirer.prompt(addEmployeePrompt())
+        await db.promise().query(`INSERT INTO employee (first_name, last_name, role_id, manager_id)) VALUES ("${employee_firstName}","${employee_lastName}","${employee_role}", "${employee_manager}");`)
+        console.log(`Added ${employee_firstName} ${employee_lastName} as ${employee_role} in the ${role_department} department under manager ${employee_manager}`)
         viewAllRoles()
     } catch (error) {
         console.log(error)
@@ -52,13 +59,18 @@ const addToRoles = async() => {
 const mainMenu = async () =>{
     try {
         const menuAnswer = await inquirer.prompt(menuPrompt)
-        await menuAnswer
-    } catch (error) {
-        console.log(error)
-    }
-};
+            if (menuAnswer === "View All Departments"){
+                viewAllDepartments();
+            }
+            if (menuAnswer === "Exit"){
+                db.end
+            }
+        }catch (error) {
+            console.log(error)
+        }
+    };
 
-// mainMenu()
+//mainMenu()
 
 
-viewAllDepartments()
+viewAllRoles()

@@ -1,3 +1,5 @@
+const db = require("./dbConnection")
+
 const menuPrompt = [{
     type:"list",
     name:"choices",
@@ -9,27 +11,32 @@ const menuPrompt = [{
         {name:"Add a Department", value: "ADD_DEPARTMENT"},
         {name:"Add a Role", value: "ADD_ROLE"},
         {name:"Add an Employee", value: "ADD_EMPLOYEE"},
-        {name:"Update an Employee Role", value: "UDPATE_EMPLOYEE"},            
+        {name:"Update an Employee Role", value: "UDPATE_EMPLOYEE"},
+        {name: "Exit", value: "EXIT"}            
     ]
 }]
 
 const addDepartmentPrompt = {
     type: "input",
     name: "department_name",
-    message: "What's it gonna be?"
+    message: "What is the name of the department?"
 }
 
 const addRolePrompt = (departmentChoices) => [{
     type: "input",
     name: "role_title",
-    message: "What's it gonna be?",
+    message: "What is the name of the role?",
 
 },
 {
     type:"list",
     name:"role_department",
     message:"Which department will this role belong to?",
-    choices: departmentChoices
+    choices: departmentChoices = async () => {
+        const departmentQuery = `SELECT id AS value, name FROM department;`;
+        const departments = await db.promise().query(departmentQuery);
+        return departments[0];
+        }
 },
 {
     type:"input",
@@ -53,13 +60,21 @@ const addEmployeePrompt = (roleChoice, employeeManager) => [
         type: "list",
         name: "employee_role",
         message: "What is the employee's role?",
-        choices: roleChoices
+        choices: roleChoice = async () => {
+            const roleQuery = `SELECT title FROM role;`;
+            const roles = await db.promise().query(roleQuery);
+            return roles[0];
+            }
     },
     {
         type: "list",
-        name: "employee_Manager",
+        name: "employee_manager",
         message: "Who is the employee's manager?",
-        choices: employeeManager
+        choices: employeeManager = async () => {
+            const managerQuery = `SELECT manager_id FROM employee;`;
+            const manager = await db.promise().query(managerQuery);
+            return manager[0];
+            }
     }
 
 ]
