@@ -16,7 +16,7 @@ const viewAllRoles= async () => {
 }
 
 const viewAllEmployees= async () => {
-    const [employeeRows,_] = await db.promise().query("SELECT * FROM employee")
+    const [employeeRows,_] = await db.promise().query("SELECT * FROM employees")
     console.log(employeeRows)
     mainMenu()
 }
@@ -37,7 +37,7 @@ const addToDepartments = async () => {
 const addToRoles = async() => {
     try {
         const {role_title, role_department, role_salary} = await inquirer.prompt(addRolePrompt())
-        await db.promise().query(`INSERT INTO role (title, salary) VALUES ("${role_title}","${role_salary}");`)
+        await db.promise().query(`INSERT INTO role (title, salary, department_id) VALUES ("${role_title}","${role_salary}","${role_department}");`)
         console.log(`Inserted ${role_title} in the ${role_department} department with the salary of ${role_salary} into database`)
         viewAllRoles()
     } catch (error) {
@@ -73,4 +73,4 @@ const mainMenu = async () =>{
 //mainMenu()
 
 
-viewAllRoles()
+viewAllEmployees()

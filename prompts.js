@@ -61,7 +61,7 @@ const addEmployeePrompt = (roleChoice, employeeManager) => [
         name: "employee_role",
         message: "What is the employee's role?",
         choices: roleChoice = async () => {
-            const roleQuery = `SELECT title FROM role;`;
+            const roleQuery = `SELECT id AS value, title FROM role;`;
             const roles = await db.promise().query(roleQuery);
             return roles[0];
             }
@@ -71,7 +71,7 @@ const addEmployeePrompt = (roleChoice, employeeManager) => [
         name: "employee_manager",
         message: "Who is the employee's manager?",
         choices: employeeManager = async () => {
-            const managerQuery = `SELECT manager_id FROM employee;`;
+            const managerQuery = `SELECT id AS value, manager_id FROM employee;`;
             const manager = await db.promise().query(managerQuery);
             return manager[0];
             }
