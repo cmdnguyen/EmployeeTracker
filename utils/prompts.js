@@ -1,4 +1,4 @@
-const db = require("./dbConnection")
+const db = require("./connection")
 
 const menuPrompt = [{
     type:"list",
@@ -45,7 +45,7 @@ const addRolePrompt = (departmentChoices) => [{
 },
 ]
 
-const addEmployeePrompt = (roleChoice, employeeManager) => [
+const addEmployeePrompt = (roleChoices, employeeManager) => [
     {
         type: "input",
         name: "employee_firstName",
@@ -60,9 +60,10 @@ const addEmployeePrompt = (roleChoice, employeeManager) => [
         type: "list",
         name: "employee_role",
         message: "What is the employee's role?",
-        choices: roleChoice = async () => {
-            const roleQuery = `SELECT id AS value, title FROM role;`;
+        choices: roleChoices = async () => {
+            const roleQuery = `SELECT id AS value title FROM role;`;
             const roles = await db.promise().query(roleQuery);
+            console.log(roles)
             return roles[0];
             }
     },
@@ -71,12 +72,36 @@ const addEmployeePrompt = (roleChoice, employeeManager) => [
         name: "employee_manager",
         message: "Who is the employee's manager?",
         choices: employeeManager = async () => {
-            const managerQuery = `SELECT id AS value, manager_id FROM employee;`;
+            const managerQuery = `SELECT id AS value FROM employee WHERE manager_id IS NULL;`;
             const manager = await db.promise().query(managerQuery);
+            console.log(manager)
             return manager[0];
             }
-    }
+    }]
 
+const updateEmployeePrompt = (employeeChoice, roleChoices) => [
+    {
+        type:"list",
+        name:"employee",
+        choices: employeeChoice = async () => {
+            const employeeQuery = `SELECT * FROM employee`
+            const employee = await db.promise().query(employeeQuery);
+            return employee[0]
+        }
+    },
+    {
+        type: "list",
+        name: "employee_role",
+        message: "What is the employee's role?",
+        choices: roleChoices = async () => {
+            const roleQuery = `SELECT id AS value title FROM role;`;
+            const roles = await db.promise().query(roleQuery);
+            console.log(roles)
+            return roles[0];
+            }
+    }
 ]
 
-module.exports = {menuPrompt,addDepartmentPrompt, addRolePrompt, addEmployeePrompt}
+
+
+module.exports = {menuPrompt,addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateEmployeePrompt}
