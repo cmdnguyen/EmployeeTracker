@@ -103,8 +103,8 @@ const updateEmployee = async() => {
     try {
         const {employee, employee_role} = await inquirer.prompt(updateEmployeePrompt())
         await db.promise().query(
-            `UDPATE employee 
-            SET role_id = "${employee_role}"' 
+            `UPDATE employee 
+            SET role_id = "${employee_role}" 
             WHERE employee.id = "${employee}";`)
         //After updating the employee, this will show you all the employees in the database
         viewAllEmployees()

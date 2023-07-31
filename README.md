@@ -2,6 +2,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
 
+This is an employee managing application where you can view, add and update an employee, roles or departments. This database is used to track employee and their job information. You can view or manage their roles, departments, salary and managers.
+
+This app uses MySQL and Node inquirer to run the database. Using these two packages was difficult. I was trying multiple queries to add data and view tables in a way people can understand. I ran into syntax errors in the query while developing this app. After debugging and asking for help, I was able have a running application.
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -11,6 +15,26 @@
 
 ## Installation
 
+To get started, users will have to use a terminal and clone the GitHub repository in their own directory.
+
+	git clone git@github.com:cmdnguyen/EmployeeTracker.git
+
+Once cloned, users will need [VSCode](https://code.visualstudio.com/download) and open up the directory. In the terminal, you can use the following commands:
+
+	cd EmployeeTracker
+	code .
+
+Users will also need [NodeJS](https://nodejs.org/en) & [MySQL](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide) installed. I used the LTS version for Node.
+
+Users will need to initizalize npm and install the packages needed to run the program. Input the following commands in the terminal:
+
+	npm init -y
+	npm install
+
+You should have a `package.json` file in the directory. When you go in the `package.json` file, you should see "inquirer" and "mysql2" in "dependencies." 
+You should also see "start" in "scripts," which will be used to run the program.
+
+Before starting the application, you will need to get the database into MySQL.
 
 ## Usage
 
