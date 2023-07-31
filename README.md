@@ -43,6 +43,8 @@ Before starting the application, you will need to get the database into MySQL.
 
 Boot Camp Tutor, Alexis Gonzales
 
+Boot Camp TA, Ben Lin
+
 AskBCS
 
 [Stack Overflow](https://stackoverflow.com/questions/75420796/mysql-results-for-inquirer-prompt)
