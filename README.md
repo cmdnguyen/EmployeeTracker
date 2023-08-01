@@ -36,7 +36,17 @@ Users will need to initizalize npm and install the packages needed to run the pr
 You should have a `package.json` file in the directory. When you go in the `package.json` file, you should see "inquirer" and "mysql2" in "dependencies." 
 You should also see "start" in "scripts," which will be used to run the program.
 
-Before starting the application, you will need to get the database into MySQL.
+Before starting the application, you will need to get the database into MySQL. Input this command to access MySQL terminal:
+
+	mysql -u root -p
+
+You should be in the MySQL terminal. You need to source the schema and the seeds into the database. Input the following commands: 
+
+	source db/schema.sql;
+	source db/seeds.sql;
+	quit;
+
+The last command will exit the MySQL terminal and now the database is available to use.
 
 ## Usage
 
