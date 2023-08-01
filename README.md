@@ -54,7 +54,8 @@ Once everything is installed, you can use the program.
 
 Here's a video demostrating how it works:
 
-[EmployeeTrackerDemo.webm](https://github.com/cmdnguyen/EmployeeTracker/assets/131038401/9cbd2aea-f601-4627-87e2-a7d5cbfca7f6)
+[EmployeeTrackerDemo.webm](https://github.com/cmdnguyen/EmployeeTracker/assets/131038401/6e40e1a1-4e57-47d2-8fba-003c7423d59a)
+
 ---
 
 There are two ways to start the program. You can use one of the following commands.
