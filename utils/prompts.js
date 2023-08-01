@@ -1,5 +1,5 @@
 //Import path for database connection
-const db = require("./connection")
+const db = require("../config/connection")
 
 //Prompts the main menu
 const menuPrompt = [{

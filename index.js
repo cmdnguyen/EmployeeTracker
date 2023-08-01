@@ -2,7 +2,7 @@
 const inquirer = require("inquirer")
 const table = require("as-table")
 const {menuPrompt,addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateEmployeePrompt} = require("./utils/prompts")
-const db = require("./utils/connection")
+const db = require("./config/connection")
 
 
 //Views all departments in the database
@@ -32,6 +32,8 @@ const viewAllRoles= async () => {
     mainMenu()
 }
 
+//Views all employees in the database
+//Uses id, first & last name, role title, department name, salary and manager as the columns
 const viewAllEmployees= async () => {
     const [employeeRows,_] = await db.promise().query(`
     SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name,' ', manager.last_name) AS manager 
@@ -39,7 +41,6 @@ const viewAllEmployees= async () => {
     JOIN role ON employee.role_id = role.id
     JOIN department ON role.department_id = department.id
     LEFT JOIN employee AS manager ON employee.manager_id = manager.id`)
-
     //Creates a table for employees in the terminal
     const employeeTable = table(employeeRows)
     console.log(`\n`)

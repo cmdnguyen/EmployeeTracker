@@ -1,5 +1,7 @@
 # Employee Tracker
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Description
 
 This is an employee managing application where you can view, add and update an employee, roles or departments. This database is used to track employee and their job information. You can view or manage their roles, departments, salary and managers.
@@ -37,6 +39,35 @@ You should also see "start" in "scripts," which will be used to run the program.
 Before starting the application, you will need to get the database into MySQL.
 
 ## Usage
+
+Once everything is installed, you can use the program.
+
+Here's a video demostrating how it works:
+
+There are two ways to start the program. You can use one of the following commands.
+
+    npm start
+    node index.js
+
+It will connect you to the employee database and show you the main menu. It should look like this:
+
+
+Each option will take you to a different function based on what the user wants to do. At the end of each function will take you back to the main menu.
+
+Here's what each viewing function should look like:
+
+
+
+When you select any of the add functions, it was prompt questions based on the selection made. After all the questions have been answered, the app will take you to view the table related to it and prove that new values have been added.
+
+Here's what function look like after answer all the questions:
+
+
+
+When you choose to update an employee, it will ask for which employee to update and what their new role will be. After the prompts, it will take you to the "View All Employees" table to prove the employee has been updated.
+
+Here's what it looks like after updating an employee:
+
 
 
 ## Credits
