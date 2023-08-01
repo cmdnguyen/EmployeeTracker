@@ -44,6 +44,8 @@ Once everything is installed, you can use the program.
 
 Here's a video demostrating how it works:
 
+[EmployeeTrackerDemo.webm](https://github.com/cmdnguyen/EmployeeTracker/assets/131038401/9cbd2aea-f601-4627-87e2-a7d5cbfca7f6)
+
 ---
 There are two ways to start the program. You can use one of the following commands.
 
@@ -51,6 +53,7 @@ There are two ways to start the program. You can use one of the following comman
     node index.js
 
 It will connect you to the employee database and show you the main menu. It should look like this:
+
 ![Main Menu](./Assets/MainMenu.png)
 ---
 
