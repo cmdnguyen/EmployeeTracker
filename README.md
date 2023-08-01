@@ -44,31 +44,43 @@ Once everything is installed, you can use the program.
 
 Here's a video demostrating how it works:
 
+---
 There are two ways to start the program. You can use one of the following commands.
 
     npm start
     node index.js
 
 It will connect you to the employee database and show you the main menu. It should look like this:
-
+![Main Menu](./Assets/MainMenu.png)
+---
 
 Each option will take you to a different function based on what the user wants to do. At the end of each function will take you back to the main menu.
 
 Here's what each viewing function should look like:
 
+![View Department](./Assets/ViewDepartments.png)
+---
 
-
+![View Role](./Assets/ViewRoles.png)
+---
+![View Employees](./Assets/ViewEmployees.png)
+---
 When you select any of the add functions, it was prompt questions based on the selection made. After all the questions have been answered, the app will take you to view the table related to it and prove that new values have been added.
 
 Here's what function look like after answer all the questions:
 
+![AddDepartment](./Assets/AddDepartment.png)
+---
+![AddRole](./Assets/AddRole.png)
+---
 
-
+![AddEmployee](./Assets/AddEmployee.png)
+---
 When you choose to update an employee, it will ask for which employee to update and what their new role will be. After the prompts, it will take you to the "View All Employees" table to prove the employee has been updated.
 
 Here's what it looks like after updating an employee:
 
-
+![UpdateEmployee](./Assets/UpdateEmployee.png)
 
 ## Credits
 
